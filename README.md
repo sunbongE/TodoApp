@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+package.json
+
+- 종속성을 정의하는 파일 (스프링에서 maven pom.xml과 비슷하다.)
+
+node_modules
+
+- 모든 종속성이 다운로드되는 폴더
