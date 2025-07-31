@@ -1,6 +1,6 @@
 import './App.css'; 
 import Counter from './components/counter/Counter';
-import Practice from './components/learning-example/Practice';
+// import Practice from './components/learning-example/Practice';
 
 function App() {
   return (
