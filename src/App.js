@@ -1,11 +1,11 @@
 import './App.css'; 
-import Counter from './components/counter/Counter';
+import TodoApp from './components/todo/TodoApp';
 // import Practice from './components/learning-example/Practice';
 
 function App() {
   return (
     <div className='App'>
-      <Counter></Counter>
+      <TodoApp></TodoApp>
     </div>
         
   );
