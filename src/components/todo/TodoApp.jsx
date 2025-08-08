@@ -1,13 +1,17 @@
 import { useState } from "react";
 import "./TodoApp.css";
-
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 export default function TodoApp() {
     return (
         <div className="TodoApp">
-            Todo Management Application
-            <LoginComponent />
-            <WelcomeComponent/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/login" element={<LoginComponent />}></Route>
+                    <Route path="/welcome" element={<WelcomeComponent/>}></Route>
+                    <Route path="*" element={<ErrorComponent/>}></Route>
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }
@@ -19,6 +23,8 @@ function LoginComponent() {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     
+    const navigate = useNavigate();
+
     function handleUsername(e) {
         setUsername(e.target.value);
     }
@@ -28,10 +34,11 @@ function LoginComponent() {
     }
 
     function handleSubmit() {
-        if (username == 'class' && password == '1234') {
+        if (username === 'class' && password === '1234') {
             // 인증 성공 메시지 
             setShowSuccessMessage(true)
             setShowErrorMessage(false)
+            navigate("/welcome")
         } else {
             
             setShowSuccessMessage(false)
@@ -43,6 +50,7 @@ function LoginComponent() {
 
     return (
         <div className="Login">
+            <h1>Time to Login!</h1>
             {showSuccessMessage && <div className="SuccessMessage"> <h1>Authentication Success</h1> </div>}
             {showErrorMessage && <div className="ErrorMessage"> <h1>Authentication Error. Please check your credentials.</h1> </div>}
             
@@ -65,9 +73,20 @@ function LoginComponent() {
 
 function WelcomeComponent() {
     return (
-        <div className="">
+        <>
+            <h1>Welcome UserName</h1>
+            <div className="Welcome">
+                Welcome Component
+            </div>
+        </>
+    )
+}
 
-
+function ErrorComponent() {
+    return (
+        <div className="ErrorComponent">
+            <h1>404</h1>
+            Error Component
         </div>
     )
 }
