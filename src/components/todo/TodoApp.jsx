@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./TodoApp.css";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, useParams} from "react-router-dom";
 
 export default function TodoApp() {
     return (
@@ -8,7 +8,8 @@ export default function TodoApp() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/login" element={<LoginComponent />}></Route>
-                    <Route path="/welcome" element={<WelcomeComponent/>}></Route>
+                    <Route path="/welcome/:username" element={<WelcomeComponent />}></Route>
+                    <Route path="/todos" element={<ListTodosComponent/>}></Route>
                     <Route path="*" element={<ErrorComponent/>}></Route>
                 </Routes>
             </BrowserRouter>
@@ -38,7 +39,7 @@ function LoginComponent() {
             // 인증 성공 메시지 
             setShowSuccessMessage(true)
             setShowErrorMessage(false)
-            navigate("/welcome")
+            navigate(`/welcome/${username}`)
         } else {
             
             setShowSuccessMessage(false)
@@ -72,9 +73,11 @@ function LoginComponent() {
 
 
 function WelcomeComponent() {
+    const {username} = useParams();
+    console.log(username)
     return (
         <>
-            <h1>Welcome UserName</h1>
+            <h1>Welcome {username}</h1>
             <div className="Welcome">
                 Welcome Component
             </div>
@@ -87,6 +90,42 @@ function ErrorComponent() {
         <div className="ErrorComponent">
             <h1>404</h1>
             Error Component
+        </div>
+    )
+}
+
+function ListTodosComponent() {
+    const todos = [
+        {id : 1, description:'Learn AWS'},
+        {id : 2, description:'Learn Full Stack Dev'},
+        {id : 3, description:'Learn DevOps'}
+    ]
+
+    return (
+        <div className="ListTodosComponent">
+            <h1>Things You Want To Do!</h1>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>description</td>
+                        </tr>
+                    </thead>
+                </table>
+                <tbody>
+                    {
+                        todos.map(
+                            todo => (
+                                <tr key={todo.id}>
+                                    <td>{todo.id}</td>
+                                    <td>{ todo.description }</td>
+                                </tr>
+                            )
+                        )
+                    }
+                </tbody>
+            </div>
         </div>
     )
 }
