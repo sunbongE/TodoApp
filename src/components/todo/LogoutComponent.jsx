@@ -1,5 +1,8 @@
+import { useAuth } from "./security/AuthContext";
 
 function LogoutComponent() {
+    const authContext = useAuth();
+    authContext.setIsAuthenticated(false);
     return (
         <div className="LogoutComponent">
             <h1>You are logged out!</h1>

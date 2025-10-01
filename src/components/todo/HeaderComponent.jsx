@@ -4,6 +4,9 @@ import { useAuth } from "./security/AuthContext";
 
 function HeaderComponent() {
     const authContext = useAuth();
+    //console.log(authContext);
+    const isAuthenticated = authContext.isAuthenticated;
+
 
     return (
         <div className="HeaderComponent">
@@ -20,8 +23,12 @@ function HeaderComponent() {
                                 </ul>
                             </div>
                             <ul className="navbar-nav">
-                                <li className="nav-item fs-5"><Link className="nav-link" to="/login">Login</Link></li>
+                                {!isAuthenticated &&
+                                    <li className="nav-item fs-5"><Link className="nav-link" to="/login">Login</Link></li>
+                                }
+                                {isAuthenticated &&
                                 <li className="nav-item fs-5"><Link className="nav-link" to="/logout">Logout</Link></li>
+                                }
                             </ul>
                         </nav>
                     </div>
