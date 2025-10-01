@@ -7,7 +7,6 @@ function LoginComponent() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     
     const navigate = useNavigate();
@@ -22,15 +21,10 @@ function LoginComponent() {
     }
 
     function handleSubmit() {
-        if (username === 'class' && password === '1234') {
+        if (authContext.login(username, password)) {
             // 인증 성공 메시지 
-            authContext.setIsAuthenticated(true);
-            setShowSuccessMessage(true)
-            setShowErrorMessage(false)
             navigate(`/welcome/${username}`)
         } else {
-            authContext.setIsAuthenticated(false);
-            setShowSuccessMessage(false)
             setShowErrorMessage(true)
         }
 
@@ -47,7 +41,7 @@ function LoginComponent() {
     return (
         <div className="Login">
             <h1>Time to Login!</h1>
-            {showSuccessMessage && <div className="SuccessMessage"> <h1>Authentication Success</h1> </div>}
+            
             {showErrorMessage && <div className="ErrorMessage"> <h1>Authentication Error. Please check your credentials.</h1> </div>}
             
             <div className="LoginForm">
